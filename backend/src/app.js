@@ -1,9 +1,12 @@
 import express from "express";
 import { port } from "./config/index.js";
+import loader from "./loaders/index.js";
 
 const app = express();
 
 app.use(express.json());
+
+loader(app);
 
 app.listen(port, (err) => {
   if (err) {
