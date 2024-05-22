@@ -1,28 +1,34 @@
 import KnowledgeModel from "./../../../models/KnowledgeModel.js";
 import CategoriesModel from "../../../models/CategoriesModel.js";
+import AdditionalInformationModel from "../../../models/AdditionalInformationModel.js";
 
 export default async function updateKnowledge(req, res) {
   try {
     const { id } = req.params;
-    const { name, description, categoryId } = req.body;
-    const knowledge = await KnowledgeModel.findByPk(id);
+    const { title, description, categoryIds, additionalInformation } = req.body;
+    console.log("updatingg...");
+    const knowledge = await KnowledgeModel.findByPk(id, {
+      include: [
+        { model: AdditionalInformationModel, as: "additionalInformation" },
+        { model: CategoriesModel, as: "categories" },
+      ],
+    });
 
     if (!knowledge) {
       return res.status(404).json({ error: "Conhecimento não encontrado" });
     }
 
-    const category = await CategoriesModel.findByPk(categoryId);
-    if (category) {
-      await knowledge.update({
-        name: name,
-        description: description,
-        categoryId: categoryId,
-      });
-    } else {
-      await knowledge.update({
-        name: name,
-        description: description,
-      });
+    await knowledge.update({
+      title: title,
+      description: description,
+    });
+
+    if (additionalInformation && knowledge.additionalInformation) {
+      await knowledge.additionalInformation.update(additionalInformation);
+    }
+
+    if (categoryIds) {
+      await knowledge.setCategories(categoryIds);
     }
 
     res.status(200).json({ knowledge });

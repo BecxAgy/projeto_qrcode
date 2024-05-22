@@ -1,11 +1,12 @@
-//import expressLoader from "./express.js";
+import expressLoader from "./express.js";
 import sequelize from "./sequelize.js";
 
 import { setupKnowledgeAssociatons } from "../models/KnowledgeModel.js";
 import { setupCategoriesAssociatons } from "../models/CategoriesModel.js";
+import { setupAdditionalInformationAssociatons } from "../models/AdditionalInformationModel.js";
 
 export default async (app) => {
-  //expressLoader(app);
+  expressLoader(app);
 
   // Sincronize os modelos com o banco de dados
   (async () => {
@@ -15,6 +16,7 @@ export default async (app) => {
       // Sincronize os modelos com o banco de dados
       setupKnowledgeAssociatons();
       setupCategoriesAssociatons();
+      setupAdditionalInformationAssociatons();
 
       await sequelize.sync({ alter: true });
       console.log(Object.keys(sequelize.models));
@@ -26,6 +28,8 @@ export default async (app) => {
       console.log(sequelize.models.Knowledge.associations);
       console.log("CategoriesModel: ");
       console.log(sequelize.models.Categories.associations);
+      console.log("AddtionalInformationModel: ");
+      console.log(sequelize.models.AdditionalInformation.associations);
 
       console.log("================================");
 

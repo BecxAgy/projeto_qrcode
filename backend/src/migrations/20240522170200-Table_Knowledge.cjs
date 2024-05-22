@@ -1,6 +1,7 @@
 "use strict";
 
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("qrcode_knowledge", {
@@ -31,10 +32,21 @@ module.exports = {
         references: {
           model: "qrcode_categories",
           key: "id",
+          onDelete: "CASCADE",
+        },
+      },
+      additionalInformationId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "qrcode_additionalInformation",
+          key: "id",
+          onDelete: "CASCADE",
         },
       },
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("knowledge");
   },

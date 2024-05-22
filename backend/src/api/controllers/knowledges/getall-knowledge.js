@@ -6,10 +6,16 @@ export default async function getAllKnowledge(req, res) {
       order: [["title", "ASC"]],
       attributes: ["id", "title", "description", "quantity_views"],
 
-      include: {
-        association: "categories",
-        attributes: ["id", "name"],
-      },
+      include: [
+        {
+          association: "categories",
+          attributes: ["id", "name", "hexadecimal_color"],
+        },
+        {
+          association: "additionalInformation",
+          attributes: ["id", "applicability", "references", "importance_level"],
+        },
+      ],
     });
 
     return res.status(200).json({ knowledges });

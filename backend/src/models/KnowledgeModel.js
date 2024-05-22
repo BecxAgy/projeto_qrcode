@@ -35,9 +35,15 @@ KnowledgeModel.init(
 );
 
 async function setupKnowledgeAssociatons() {
-  KnowledgeModel.belongsTo(sequelize.models.Categories, {
-    foreignKey: "categoryId",
-    as: "categories",
+  KnowledgeModel.belongsToMany(sequelize.models.Categories, {
+    through: "KnowledgeCategories",
+    foreignKey: "knowledgeId",
+    as: "categories", // use the same alias as in CategoriesModel
+  });
+
+  KnowledgeModel.belongsTo(sequelize.models.AdditionalInformation, {
+    foreignKey: "additionalInformationId",
+    as: "additionalInformation",
   });
 }
 

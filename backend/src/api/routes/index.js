@@ -1,6 +1,9 @@
-import bodyParser from "body-parser";
-import knowledgeRoute from "./knowledge.js";
+import { Router } from "express";
 
-export default (app) => {
-  app.use(bodyParser.json(), knowledgeRoute);
-};
+import knowledge from "./knowledge.js";
+
+const router = Router();
+
+router.use("/knowledge", knowledge);
+
+export default router;
