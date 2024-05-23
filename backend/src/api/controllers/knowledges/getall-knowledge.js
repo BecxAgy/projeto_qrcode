@@ -1,3 +1,21 @@
+/**
+ * @swagger
+ * /knowledge:
+ *   get:
+ *     summary: Retrieve a list of knowledge
+ *     tags: [Knowledge]
+ *     responses:
+ *       200:
+ *         description: A list of knowledge
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Knowledge'
+ *       500:
+ *         description: An error occurred while retrieving knowledge
+ */
 import KnowledgeModel from "../../../models/KnowledgeModel.js";
 
 export default async function getAllKnowledge(req, res) {

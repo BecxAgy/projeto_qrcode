@@ -1,3 +1,29 @@
+/**
+ * @swagger
+ * /knowledge/{id}:
+ *   get:
+ *     summary: Retrieve a knowledge by id
+ *     tags: [Knowledge]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The knowledge id
+ *     responses:
+ *       200:
+ *         description: The knowledge was successfully retrieved
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Knowledge'
+ *       404:
+ *         description: The knowledge was not found
+ *       500:
+ *         description: An error occurred while retrieving the knowledge
+ */
+
 import KnowledgeModel from "../../../models/KnowledgeModel.js";
 
 export default async function getKnowledge(req, res) {
