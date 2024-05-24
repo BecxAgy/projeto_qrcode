@@ -15,7 +15,7 @@ const {
   JWT_REFRESH_SECRET_KEY,
 } = process.env;
 
-export const port = PORT || 3000;
+export const port = PORT || 3005;
 export const db_host = DB_HOST;
 export const db_name = DB_NAME;
 export const db_user = DB_USER;
