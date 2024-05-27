@@ -20,7 +20,7 @@ async function downloadQrCode(id: string) {
   const base64Data = url.replace("data:image/png;base64,", "");
 
   // Converte a URL base64 em um Blob
-  const byteCharacters = atob(base64Data);
+  const byteCharacters = atob(base64Data); //vai transformar a string da base64 em bytes
   const byteNumbers = new Array(byteCharacters.length);
   for (let i = 0; i < byteCharacters.length; i++) {
     byteNumbers[i] = byteCharacters.charCodeAt(i);
